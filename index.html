@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WBT</title>
+  <link rel="stylesheet" href="speedteststyle.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
+  <script src="keyboard_anim.js"></script>
+  <script src="data.js"></script>
+  <script src="speedtest.js" defer></script>
+</head>
+
+<body>
+  <div class="fog_curtain"></div>
+  <div class="start_menu">
+    <div id="keyboard-anim"></div>
+    <button class="start_btn">Start Typing Test</button>
+  </div>
+  <div class="container">
+
+
+
+<div class="title-bstscore">
+  
+ <div class="titlewords"> <p class="bgword">   
+  <img class="kicon" src="Kboard.png" alt="keyboard icon">
+  Typing speed test</p>
+  <span class="smalword">type as fast as you can in 60s</span> </div>
+  <div class="bestscore">
+  <img class="bestscoreCup" src=" bestscore-cup.png" alt="reward icon">
+  <p class="bestscore-text">Personal best Score : <span class="bestscore-num">0</span></p></div>
+</div>
+
+
+<div class="stats_diff_mode">
+<div class="stats">
+  <p class="WPM">WPM : <span class="WPM_num">0</span></p>
+  <div class="vl"></div>
+  <p class="accuracy">accuracy :<span class="accuracy_num">0</span><span class="precentage_mark">%</span></p>
+  <div class="vl"></div>
+  <p class="time">time : <span class="timer_num">0</span></p>
+</div>
+<div class="Difficulty">
+  <span>Difficulty : </span>
+  <button class="easy">Easy</button>
+  <button class="medium focus">Medium</button>
+  <button class="hard">Hard</button>
+
+  
+</div>
+  <div class="vl"></div>
+
+<div class="mode">
+  <span>Mode : </span>
+  <button class="s60 focus">60s <p>  just <span class="BlueSpanSord">60 second</span> type as fast as you can <br><span class="SupWord">Go go goo!</span></p></button>
+  <button class="psgmode">passage<p><span class="BlueSpanSord">200s</span> test your accuracy<br>with <span class="SupWord">zero rush!</span></p></button>
+</div>
+</div>
+
+<hr>
+<!-- here the test will appear  -->
+<p class="TextTest"></p>
+<div class="restartBtnDiv">
+  <button class="restart_btn">Restart <span class="circle"> 
+    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="28" height="28" viewBox="0 0 72 72">
+      <path d="M 34.099609 7.0019531 C 33.029594 6.94575 32 7.7786875 32 8.9921875 L 32 12.339844 C 20.664873 14.250415 12 24.129249 12 36 C 12 49.234 22.767 60 36 60 C 49.233 60 60 49.234 60 36 C 60 30.33 57.985125 24.827859 54.328125 20.505859 C 52.898125 18.818859 50.374406 18.606156 48.691406 20.035156 C 47.004406 21.462156 46.793703 23.986828 48.220703 25.673828 C 50.657703 28.552828 52 32.22 52 36 C 52 44.822 44.822 52 36 52 C 27.178 52 20 44.822 20 36 C 20 28.561394 25.110881 22.310779 32 20.527344 L 32 23.005859 C 32 24.624859 33.829484 25.566 35.146484 24.625 L 44.951172 17.617188 C 46.061172 16.824188 46.061172 15.173859 44.951172 14.380859 L 35.146484 7.3730469 C 34.817234 7.1377969 34.456281 7.0206875 34.099609 7.0019531 z"></path>
+    </svg>
+  </span></button>
+</div>
+
+<div class="results hide">
+  <span class="FstStar" aria-hidden="true">
+    <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M18 3V33M3 18H33M7.4 7.4L28.6 28.6M7.4 28.6L28.6 7.4" stroke="#ff4d6d" stroke-width="3" stroke-linecap="round"/>
+    </svg>
+  </span>
+
+  <div class="resultDiv">
+    <div class="success-ring">
+      <div class="success-ring-outer"></div>
+      <div class="success-ring-mid"></div>
+      <div class="success-ring-center">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      </div>
+    </div>
+
+    <div class="SupurtiveText">
+      <h2 class="LrgSnt">Test Complete!</h2>
+      <p class="SmlSnt">Solid run. Keep pushing to beat your high score.</p>
+    </div>
+
+    <div class="share-results">
+      <div class="result-card">
+        <span class="card-label">WPM:</span>
+        <span class="card-value WPMInResult">0</span>
+      </div>
+      <div class="result-card">
+        <span class="card-label">Accuracy:</span>
+        <span class="card-value AccInResult">0%</span>
+      </div>
+      <div class="result-card">
+        <span class="card-label">Characters</span>
+        <span class="card-value Characters">
+          <span class="chars-correct">0</span><span class="chars-slash">/</span><span class="chars-wrong">0</span>
+        </span>
+      </div>
+    </div>
+
+    <button class="go-again-btn" id="goAgainBtn">
+      Go Again
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+        <path d="M3 3v5h5"/>
+      </svg>
+    </button>
+  </div>
+
+  <span class="SecStar" aria-hidden="true">
+    <svg width="34" height="34" viewBox="0 0 32 32" fill="#facc15" xmlns="http://www.w3.org/2000/svg">
+      <path d="M16 0C16 8.83656 8.83656 16 0 16C8.83656 16 16 23.1634 16 32C16 23.1634 23.1634 16 32 16C23.1634 16 16 8.83656 16 0Z"/>
+    </svg>
+  </span>
+</div>
+
+
+</div>
+
+</body>
+
+</html>
