@@ -1,0 +1,5 @@
+function arg(fst,sec,Thrd)
+{
+console.log(arguments) 
+
+//  >>  Used for create object containing all the parapeters of the main function  
