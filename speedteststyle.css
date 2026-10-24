@@ -1,0 +1,800 @@
+@font-face {
+  font-family: 'Kineks';
+  src: url('fonts/KineksCompactTrial-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Kineks';
+  src: url('fonts/KineksCompactTrial-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Kineks';
+  src: url('fonts/KineksCompactTrial-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+* {
+  padding: 0%;
+  margin: 0;
+  margin-left: 10px;
+  box-sizing: border-box;
+  background-color: #121212;
+  font-family: 'Kineks', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: #ffffff;
+}
+
+.hide {
+  display: none !important;
+}
+
+::selection {
+  background-color: #47a6ff;
+  text-shadow: 0px 0px 4px rgba(67, 35, 35, 0.7);
+  color: #0000008b;
+}
+
+.start_menu {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  background: transparent;
+  z-index: 10;
+}
+
+#keyboard-anim {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 220px;
+  height: 220px;
+  background: transparent;
+  opacity: 0;
+  transform: translate(-56%, -74%);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  pointer-events: none;
+  /* Allows hover and clicks to pass through to the button */
+  z-index: 2;
+}
+
+#keyboard-anim svg {
+  background: transparent !important;
+}
+
+/* When hovering the start button: icon appears and floats up 10px */
+.start_menu:hover #keyboard-anim,
+.start_menu:has(.start_btn:hover) #keyboard-anim {
+  opacity: 1;
+  transform: translate(-56%, calc(-50% - 60px));
+}
+
+
+
+.start_btn {
+  color: #ffffff;
+  background-color: #157eff;
+  padding: 10px 17px;
+  font-size: 20px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease, box-shadow 0.5s ease;
+}
+
+.start_btn:hover {
+  box-shadow: 0 0 20px rgba(21, 126, 254, 0.8);
+  transform: translateY(-4px);
+
+  /* Deepen and blur the shadow to simulate physical height */
+}
+
+.start_btn.disappear,
+.start_btn.disappear:hover {
+  transform: translateY(1000px);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.start_menu.disappear #keyboard-anim {
+  opacity: 0 !important;
+  transform: translate(-56%, -40%) !important;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.container {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.fog_curtain {
+  margin: 0;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  top: 155px;
+  backdrop-filter: blur(5px);
+  background: rgba(0, 0, 0, 0.4);
+  transition: opacity 0.4s ease;
+  z-index: 5;
+}
+
+.fog_curtain.disappear {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.vl {
+  width: 1px;
+  height: 20px;
+  background-color: #333;
+}
+
+.kicon {
+  height: 30px;
+  width: 30px;
+  margin-left: 0px;
+}
+
+.bestscoreCup {
+  height: 30px;
+  width: 30px;
+}
+
+.bestscore {
+  display: flex;
+  /* 1. Puts image and text side-by-side in a row */
+  align-items: center;
+  /* 2. Vertically centers the cup with the text */
+  margin-right: 20px;
+  margin-top: auto;
+  margin-left: auto;
+  padding: 8px 16px;
+  /* Optional: looks better than just padding-left */
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+.title-bstscore {
+  margin-left: 30px;
+  display: flex;
+}
+
+
+.bgword {
+  font-weight: 800px;
+  color: #ffffff;
+  font-size: 40px;
+}
+
+.smalword {
+  display: flex;
+  margin-left: 60px;
+  font-size: 17px;
+  color: gray;
+  opacity: 0.7;
+}
+
+.stats {
+  display: flex;
+}
+
+.stats_diff_mode {
+  display: flex;
+  margin-left: 30px;
+  margin-top: 40px;
+  margin-bottom: 10px;
+
+}
+
+.WPM,
+.time,
+.accuracy {
+  color: #959597;
+  margin-right: 10px;
+}
+
+.WPM_num,
+.precentage_mark,
+.accuracy_num,
+.timer_num {
+  color: #ffffff;
+  font-weight: 1000;
+  font-size: 18px;
+}
+
+.Difficulty {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  /* Pushes difficulty and mode to the far in the right direction */
+  gap: 8px;
+
+  /* Space between buttons */
+  span {
+    color: #959597;
+  }
+
+  button {
+    color: #ffffff;
+    border: rgba(255, 255, 255, .4) solid 1px;
+
+    border-radius: 10px;
+    padding: 3px 10px;
+    transition: all 0.5s ease-in-out;
+  }
+
+  button:hover {
+    box-shadow: 1px 1px 10px rgba(229, 18, 141, 0.719);
+    color: rgb(229, 18, 141);
+    border-color: rgb(229, 18, 141);
+    transform: translateY(-2px);
+  }
+
+  button:active {
+    background-color: rgb(229, 18, 141);
+    color: #ffffff;
+  }
+
+  button.focus,
+  button:focus {
+    box-shadow: 0 0 20px rgba(229, 18, 141, 0.719);
+    color: #ffffff;
+    border-color: rgb(229, 18, 141);
+    transform: translateY(-2px);
+  }
+}
+
+hr {
+  width: 93.7%;
+  justify-content: center;
+  justify-items: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.mode {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+  /* Space between difficulty and mode */
+  margin-right: 47px;
+  /* Space between difficulty and mode */
+  gap: 8px;
+
+  /* Space between buttons */
+  span {
+    color: #959597;
+  }
+
+  button {
+    position: relative;
+    color: #ffffff;
+    border: rgba(255, 255, 255, .4) solid 1px;
+
+    border-radius: 10px;
+    padding: 3px 10px;
+    transition: all 0.3s ease-in-out;
+  }
+
+  button:hover {
+    box-shadow: 1px 1px 10px rgba(229, 18, 141, 0.719);
+    color: rgb(229, 18, 141);
+    border-color: rgb(229, 18, 141);
+    transform: translateY(-2px);
+  }
+
+  button:active {
+    background-color: rgb(229, 18, 141);
+    color: #ffffff;
+  }
+
+  button.focus,
+  button:focus {
+    box-shadow: 0 0 20px rgba(229, 18, 141, 0.719);
+    color: #ffffff;
+    border-color: rgb(229, 18, 141);
+    transform: translateY(-2px);
+  }
+}
+
+.TextTest  {
+  font-size: 70px;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  margin: 20px 40px;
+  span{
+      color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+
+.TextTest .char {
+  margin: 0;
+  display: inline-block;
+}
+
+.precentage_mark {
+  color: rgb(207, 231, 47);
+}
+
+.accGeen {
+  color: rgb(22, 210, 22);
+  transition: color 0.1s ease;
+
+}
+
+.accRed {
+  color: rgb(222, 22, 22);
+  transition: color 0.1s ease;
+
+}
+
+.correct {
+  color: rgb(22, 210, 22) !important;
+  border-bottom: 2px solid rgb(22, 210, 22);
+  transition: all 0.2s ease;
+}
+
+.incorrect {
+  color: rgb(222, 22, 22) !important;
+  border-bottom: 2px solid rgb(222, 22, 22);
+  transition: all 0.2s ease;
+}
+
+.s60 p,
+.psgmode p {
+  position: absolute;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+
+  background-color: #222222;
+  color: #ffffff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+
+  /* Hidden by default */
+  opacity: 0;
+  visibility: hidden;
+
+
+  transition: all 0.1s ease;
+  transition-delay: 0s;
+
+  .BlueSpanSord {
+    color: #4366ff;
+    font-weight: 600;
+    font-size: 15px;
+    background-color: #222222;
+  }
+
+  .SupWord {
+    color: #ff4343;
+    font-weight: 600;
+    font-size: 15px;
+    background-color: #222222;
+  }
+}
+
+.psgmode p {
+  left: auto;
+  right: -40px;
+  transform: none;
+}
+
+.s60:hover p,
+.psgmode:hover p {
+  opacity: 1;
+  visibility: visible;
+  transition-delay: 0.5s;
+}
+
+.restartBtnDiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 30px 0;
+  background: transparent;
+}
+
+.restart_btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 0;
+  padding: 8px 18px;
+  font-size: 16px;
+  color: #ffffff;
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.restart_btn:hover {
+  border-color: rgb(229, 18, 141);
+  box-shadow: 1px 1px 10px rgba(229, 18, 141, 0.719);
+  color: rgb(229, 18, 141);
+  transform: translateY(-2px);
+}
+
+.restart_btn .circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  background-color: transparent;
+}
+
+.restart_btn svg {
+  width: 22px;
+  height: 22px;
+  margin: 0;
+  fill: #ffffff;
+  background-color: transparent;
+  rotate: 0deg;
+}
+
+.restart_btn:hover svg {
+  rotate: 540deg;
+  transition: all 0.4s ease;
+}
+.restart_btn:active  {
+  background: rgb(229, 18, 141);
+   box-shadow: 0 0 20px rgba(229, 18, 141, 0.719);
+    color: #ffffff;
+    border-color: rgb(229, 18, 141);
+    transform: translateY(-2px);
+}
+
+.restart_btn svg path {
+  fill: #ffffff;
+  background-color: transparent;
+}
+
+
+
+.results.hide {
+  display: none !important;
+}
+
+.results {
+  position: relative;
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 900px;
+  min-height: calc(100vh - 220px);
+  margin-left: auto !important;
+  margin-right: auto !important;
+  margin-top: 20px !important;
+  margin-bottom: 40px !important;
+  padding: 20px 40px;
+  box-sizing: border-box;
+  background: transparent !important;
+  animation: resultsFadeIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.results * {
+  margin-left: 0;
+  box-sizing: border-box;
+}
+
+.resultDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto !important;
+  background: transparent !important;
+  z-index: 1;
+}
+
+/* Green Concentric Success Ring */
+.success-ring {
+  width: 82px;
+  height: 82px;
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px auto;
+  background: transparent !important;
+}
+
+.success-ring-outer {
+  position: absolute;
+  width: 82px;
+  height: 82px;
+  border-radius: 50%;
+  background: #113320 !important;
+  opacity: 0.65;
+}
+
+.success-ring-mid {
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #164e2e !important;
+}
+
+.success-ring-center {
+  position: relative;
+  z-index: 2;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #22c55e !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 18px rgba(34, 197, 94, 0.45);
+}
+
+.success-ring-center svg {
+  background: transparent !important;
+}
+
+/* Supportive Text / Heading */
+.SupurtiveText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 28px 0;
+  background: transparent !important;
+}
+
+.LrgSnt {
+  font-size: 34px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: -0.3px;
+  background: transparent !important;
+}
+
+.SmlSnt {
+  font-size: 15px;
+  color: #9ca3af;
+  margin: 0;
+  font-weight: 400;
+  background: transparent !important;
+}
+
+/* Stat Cards */
+.share-results {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin: 0 0 32px 0;
+  background: transparent !important;
+  flex-wrap: wrap;
+}
+
+.result-card {
+  background-color: #17171a !important;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 14px 20px;
+  min-width: 125px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  margin: 0;
+  box-sizing: border-box;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.result-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.card-label {
+  font-size: 13px;
+  color: #8e8e93;
+  margin-bottom: 6px;
+  background: transparent !important;
+  font-weight: 500;
+}
+
+.card-value {
+  font-size: 24px;
+  font-weight: 700;
+  background: transparent !important;
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+}
+
+.WPMInResult {
+  color: #ffffff;
+  background: transparent !important;
+}
+
+.AccInResult {
+  color: #ff4d6d;
+  background: transparent !important;
+}
+
+.chars-correct {
+  color: #22c55e;
+   background: transparent !important;
+}
+
+.chars-slash {
+  color: #ffffff;
+  background: transparent !important;
+  margin: 0 1px;
+}
+
+.chars-wrong {
+  color: #ef4444;
+ 
+  background: transparent !important;
+}
+
+/* "Go Again" Button */
+.go-again-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 10px 22px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  margin: 0 auto;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.go-again-btn * {
+  background: transparent !important;
+  color: #000000 !important;
+}
+
+.go-again-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 18px rgba(255, 255, 255, 0.28);
+}
+
+.go-again-btn:active {
+  transform: translateY(0);
+}
+
+.go-again-btn svg {
+  stroke: #000000 !important;
+  transition: transform 0.4s ease;
+}
+
+.go-again-btn:hover svg {
+  transform: rotate(-180deg);
+}
+
+/* Decorative Sparkle Stars */
+.FstStar {
+  position: absolute;
+  left: 20px;
+  top: 36%;
+  background: transparent !important;
+  pointer-events: none;
+  z-index: 2;
+  animation: floatStarLeft 4s ease-in-out infinite alternate;
+}
+
+.FstStar svg {
+  background: transparent !important;
+}
+
+.SecStar {
+  position: absolute;
+  right: 25px;
+  bottom: 22%;
+  background: transparent !important;
+  pointer-events: none;
+  z-index: 2;
+  animation: floatStarRight 5s ease-in-out infinite alternate;
+}
+
+.SecStar svg {
+  background: transparent !important;
+}
+
+/* Animations */
+@keyframes floatStarLeft {
+  0% { transform: translateY(-50%) rotate(0deg) scale(1); }
+  50% { transform: translateY(-60%) rotate(15deg) scale(1.1); }
+  100% { transform: translateY(-40%) rotate(-10deg) scale(0.95); }
+}
+
+@keyframes floatStarRight {
+  0% { transform: translateY(0) rotate(0deg) scale(1); }
+  50% { transform: translateY(-12px) rotate(-15deg) scale(1.12); }
+  100% { transform: translateY(8px) rotate(10deg) scale(0.92); }
+}
+
+@keyframes resultsFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .results {
+    padding: 20px 15px;
+    margin: 30px auto;
+  }
+  .FstStar {
+    left: 6px;
+    top: 25%;
+    transform: scale(0.75);
+  }
+  .SecStar {
+    right: 6px;
+    bottom: 12%;
+    transform: scale(0.75);
+  }
+  .LrgSnt {
+    font-size: 28px;
+  }
+  .share-results {
+    gap: 10px;
+  }
+  .result-card {
+    padding: 12px 16px;
+    min-width: 100px;
+  }
+  .card-value {
+    font-size: 20px;
+  }
+}
